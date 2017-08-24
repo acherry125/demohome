@@ -27,19 +27,23 @@ $filler-section-h-mobile: 3em;
 $filler-section-h: 7em;
 $filler-section-color: url('img/pattern_blue.jpg');
 
+*, *:before, *:after {
+	box-sizing: border-box;
+}
+
 body {
-	font-family: 'Arial';
-	color: $salt-blue;
+	font-family: 'Noto Sans';
+	color: $white;
 }
 header, main {
 	margin: 0 auto;
 }
 a {
-	color: $light-blue;
+	color: $white;
 	font-weight: bold;
-	text-decoration: none;
+	text-decoration: underline;
 	&:hover {
-		text-decoration: underline
+		text-decoration: none;
 	}
 }
 .navigation {
@@ -53,6 +57,8 @@ a {
 		display: none;
 		margin-left: 2em;
 		position: relative;
+		color: $light-blue;
+		text-decoration: none;
 		&:hover {
 			text-decoration: none;
 		}
@@ -89,32 +95,31 @@ a {
 	flex-flow: row wrap;
 	justify-content: space-around;
 	align-items: flex-end;
-	min-height: 740px;
+	min-height: calc(100vh - 50px);
 	padding: 0;
 	background-size: cover;
 	background-repeat: no-repeat;		
 	position: relative;
-	color: $white;
 	&:nth-of-type(1) {
 		background-image: url('img/study.jpg');
 	}
 	&:nth-of-type(2) {
-		background-image: url('img/school.jpg');
+		background-image: url('img/school2.jpg');
 	}
 	&:nth-of-type(3) {
-		background-image: url('img/room.jpg');
+		background-image: url('img/desk.jpg');
 	}
 	&:nth-of-type(4) {
 		background-image: url('img/outside.jpg');
 	}
 	&:nth-of-type(5) {
-		background-image: url('img/library.jpg');
+		background-image: url('img/library2.jpg');
 	}
 	&:nth-of-type(6) {
-		background-image: url('img/class.jpg');
+		background-image: url('img/graduation2.jpg');
 	}
 	&:nth-of-type(7) {
-		background-image: url('img/group-outdoor.jpg');
+		background-image: url('img/study2.jpg');
 	}
 	> .register {
 		align-self: center;
@@ -133,6 +138,7 @@ a {
 	border-radius: 30px;
 	border: 2px solid $white;
 	display: inline-block;
+	text-decoration: none;
 	&:hover {
 		text-decoration: none;
 		background: transparent;
@@ -149,6 +155,20 @@ a {
 	justify-content: center;
 	margin-bottom: 7em;
 }
+.secondary-cta {
+	background: transparent;
+	color: $white;
+	padding: 0.6em 1.1em;
+	border-radius: 30px;
+	border: 2px solid $white;
+	display: inline-block;
+	text-decoration: none;
+	&:hover {
+		text-decoration: none;
+		background: rgba($gray5, 0.1);
+		color: $white;
+	}
+}
 // covers sections with a very light transparent layer
 .section-filter {
 	position: absolute;
@@ -158,46 +178,83 @@ a {
     height: 100%;
     background: rgba(255,255,255,0.1);
 }
+.copy-header, .first-section-content, .copy-block {
+	z-index: 1;
+}
 // container for banner headers
 .copy-header {
 	align-self: flex-start;
 	font-size: 2.5em;
-	color: $white;
 	h2 {
-		background: rgba($salt-blue, 0.87);
-		padding: 5px;
+		background: rgba(mix($salt-blue, $white, 95%), 0.87);
+		padding: 5px 10px 10px 10px;
 	}
 }
 .first-section-content {
 	display: flex;
 }
 .first-section-content {
+	flex-flow: column-reverse nowrap;
 	justify-content: flex-end;
 	width: 100%;
+	.register-mobile-wrapper {
+		margin: 0;
+	}
 	.icon-block {
 		background: rgba($salt-blue, 0.87);
 		display: flex;
-		flex-flow: row wrap;
+		flex-flow: row nowrap;
 		justify-content: space-around;
 		align-items: center;
 		padding: 0;
 		width: 100%;
 		.icon {
 			display: inline-block;
-			width: 100px;
-			height: 100px;
-			background: white;
-			&:first-of-type {
-				background: url('img/Tools.svg');
+			width: 55px;
+			height: 130px;
+			background-repeat: no-repeat;
+			background-position: center;
+			position: relative;
+			bottom: 15px;
+			&:after {
+				content: '';
+				font-style: normal;
+				text-align: center;
+				position: absolute;
+				bottom: 0;
+				left: 0;
+				width: 100%;
+				font-weight: bold;
 			}
-			&:nth-of-type(2) {
-				background: url('img/Articles.svg');
+			&.tool-icon {
+				background-image: url('img/Tools.svg');
+				&:after {
+					content: 'Tools';
+				}
 			}
-			&:nth-of-type(3) {
-				background: url('img/Video.svg');
+			&.article-icon {
+				background-image: url('img/Articles.svg');
+				&:after {
+					content: 'Articles';
+				}
 			}
-			&:nth-of-type(4) {
-				background: url('img/Courses.svg');
+			&.video-icon {
+				background-image: url('img/Video.svg');
+				&:after {
+					content: 'Videos';
+				}
+			}
+			&.course-icon {
+				background-image: url('img/Courses.svg');
+				&:after {
+					content: 'Courses';
+				}
+			}
+			&.more-icon {
+				background-image: url('img/more.svg');
+				&:after {
+					content: '& more';
+				}
 			}
 		}
 	}
@@ -240,10 +297,9 @@ a {
 	// description text container
 	.copy-block {
 		background: rgba(65, 140, 0, 0.91);
-		padding: 0 1em 2em 1em;
+		padding: 0 1em 1.25em 1em;
 		width: 60%;
 		margin: 0;
-		z-index: 1;
 		display: block;
 		font-size: 1em;
 	}
@@ -260,12 +316,24 @@ a {
 		height: $filler-section-h;
 	}
 	.first-section-content {
+		flex-flow: row nowrap;
 		justify-content: center;
 		.copy-block {
 			width: 40%;
+		    display: flex;
+            flex-flow: row wrap;
+            justify-content: space-around;
+            align-items: center;
 		}
 		.icon-block {
 			width: 60%;
+			.icon {
+                width: 100px;
+                height: 100px;
+                &:after {
+                	bottom: -1.5em;
+                }
+            }
 		}
 	}
 }
@@ -276,9 +344,14 @@ a {
 		width: 30%;	
 		font-size: 1.25em;
 	}
+	.first-banner {
+        h2 {
+            margin-left: 2em;
+        }
+    }
 	.first-section-content {
 		.copy-block {
-			width: 25%;
+			width: 27%;
 		}
 		.icon-block {
 			width: 50%;
